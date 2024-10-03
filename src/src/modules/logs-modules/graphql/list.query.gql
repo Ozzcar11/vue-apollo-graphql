@@ -1,0 +1,18 @@
+#import "../../index/graphql/meta.fragment.gql
+#import "./log.fragment.gql"
+
+query LogsList($page: Int, $per_page: Int!, $sort: SortInput, $filter: LogFilterInput) {
+  list: logs(
+    limit: $per_page,
+    page: $page,
+    filter: $filter,
+    sort: $sort
+  ) {
+    items {
+      ...Log
+    }
+    meta {
+      ...Meta
+    }
+  }
+}

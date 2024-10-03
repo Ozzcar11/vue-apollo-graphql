@@ -1,0 +1,7 @@
+#import "./importProcessing.fragment.gql"
+
+query ImportProcessing {
+  importProcessings {
+    ...ImportProcessing
+  }
+}

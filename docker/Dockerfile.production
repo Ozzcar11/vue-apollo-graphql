@@ -1,0 +1,35 @@
+FROM node:18.19.0 as base
+
+ENV PNPM_VERSION='8.14.2'
+
+RUN --mount=type=cache,target=/var/cache/apt apt update && \
+    apt upgrade -y --no-install-recommends && \
+    npm i --global --no-update-notifier --no-fund pnpm@${PNPM_VERSION}
+
+WORKDIR /app
+COPY ./src/package.json ./
+COPY ./src/.npmrc ./
+#COPY ./src/pnpm-lock.yaml ./
+# pnpm:
+RUN --mount=type=cache,target=/root/.local/share/pnpm/store pnpm install --no-frozen-lockfile
+# npm:
+# RUN --mount=type=cache,target=/root/.npm/_cacache npm ci --no-audit --no-fund --quiet
+FROM base as builder
+WORKDIR /app
+COPY --from=base /app/node_modules ./node_modules
+COPY ./src ./
+COPY ./.env ./
+
+RUN pnpm run build
+
+# 1. static files hosting (no SSR):
+FROM nginx
+
+COPY --from=builder /app/dist /usr/share/nginx/html
+COPY ./docker/nginx/nginx.conf /etc/nginx/conf.d/default.conf
+
+# 2. with SSR:
+#FROM base
+#WORKDIR /app
+#COPY --from=builder /app/.output /app
+#CMD ["node", "/app/server/index.mjs"]

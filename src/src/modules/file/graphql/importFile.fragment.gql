@@ -1,0 +1,4 @@
+fragment ImportFile on ImportInput {
+  import_type
+  file
+}

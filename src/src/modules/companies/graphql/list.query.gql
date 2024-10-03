@@ -1,0 +1,18 @@
+#import "../../index/graphql/meta.fragment.gql"
+#import "../graphql/company.fragment.gql"
+
+query CompanyList($page: Int, $per_page: Int!, $sort: SortInput, $filter: CompanyFilterInput) {
+  list: companies(
+    limit: $per_page,
+    page: $page,
+    filter: $filter,
+    sort: $sort
+  ) {
+    items {
+      ...Company
+    }
+    meta {
+      ...Meta
+    }
+  }
+}

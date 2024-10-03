@@ -1,0 +1,15 @@
+#import "../../users/graphql/user.fragment.gql"
+#import "../../image/graphql/image.fragment.gql"
+
+fragment Partner on PartnerOffer {
+  id
+  link
+  description
+  name
+  creator {
+    ...UserFragment
+  }
+  image {
+    ...Image
+  }
+}

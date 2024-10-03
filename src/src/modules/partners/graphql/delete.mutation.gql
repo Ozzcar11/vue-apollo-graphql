@@ -1,0 +1,3 @@
+mutation PartnersDelete($id: Int!) {
+  partnerOffersDelete(partnerOffer: { id: $id })
+}

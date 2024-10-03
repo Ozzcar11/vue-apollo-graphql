@@ -1,0 +1,3 @@
+mutation ImportFile($import: ImportInput) {
+  startImport(import: $import)
+}

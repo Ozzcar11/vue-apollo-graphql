@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  app:
+    user: 1000:1000
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.local
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - $APP_PORT:$APP_PORT
+    tty: true
+    env_file:
+      - .env

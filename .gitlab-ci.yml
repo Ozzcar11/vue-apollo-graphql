@@ -1,0 +1,105 @@
+stages:
+  - build
+  - deploy-git
+  - deploy-container
+
+variables:
+  IMAGE_CACHE: $CI_REGISTRY_IMAGE:latest
+  IMAGE_TAG: "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA-$CI_COMMIT_REF_SLUG"
+
+build:
+  image: docker:24.0.2
+  stage: build
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_BUILDKIT: 1
+    PROJECT_INIT_ENV: dev
+  tags:
+    - dind
+  rules:
+    - if: $CI_COMMIT_REF_NAME == "dev"
+    - if: $CI_COMMIT_REF_NAME == "master"
+      variables:
+        PROJECT_INIT_ENV: "prod"
+    - if: $CI_COMMIT_REF_NAME == "master" || $CI_COMMIT_REF_NAME == "dev"
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker pull $IMAGE_CACHE || docker pull $IMAGE_TAG || true
+    - ./docker/scripts/init.sh "$PROJECT_INIT_ENV"
+    - docker build --cache-from $IMAGE_CACHE -t $IMAGE_TAG -t $IMAGE_CACHE -f docker/Dockerfile.production --load .
+    - docker push $IMAGE_TAG
+    - docker push $IMAGE_CACHE
+  services:
+    - name: docker:24.0.2-dind
+      command: ["--registry-mirror", "https://huecker.io"]
+
+deploy-git-dev:
+  extends: .deploy-git-common
+  only:
+    - dev
+  tags:
+    - ozzcar11-test
+  variables:
+    deploy_path: /var/www/ozzcar11-raiting-frontend
+  needs:
+    - build
+
+deploy-container-dev:
+  extends: .deploy-container-common
+  variables:
+    PROJECT_INIT_ENV: dev
+    deploy_path: /var/www/ozzcar11-raiting-frontend
+  only:
+    - dev
+  tags:
+    - ozzcar11-test
+  needs:
+    - build
+
+deploy-git-prod:
+  extends: .deploy-git-common
+  only:
+    - master
+  tags:
+    - ozzcar11-prod
+  variables:
+    deploy_path: /var/www/ozzcar11-raiting-frontend
+  needs:
+    - build
+
+deploy-container-prod:
+  extends: .deploy-container-common
+  variables:
+    PROJECT_INIT_ENV: prod
+    deploy_path: /var/www/ozzcar11-raiting-frontend
+  only:
+    - master
+  tags:
+    - ozzcar11-prod
+  needs:
+    - build
+
+.deploy-git-common:
+  stage: deploy-git
+  variables:
+    GIT_SSH_COMMAND: "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+  script:
+    - mkdir -p "$deploy_path"
+    - cd "$deploy_path"
+    - git config --global safe.directory '*'
+    - export SSH_REPO_URL=$(echo "${CI_REPOSITORY_URL}" | sed -E 's|https?://gitlab-ci-token:.*@|ssh://git@|g')
+    - git fetch --all || git clone $SSH_REPO_URL .
+    - git reset --hard ${CI_COMMIT_SHORT_SHA}
+
+.deploy-container-common:
+  stage: deploy-container
+  variables:
+    COMPOSE_FILE: docker-compose-production.yml
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - cd "$deploy_path"
+    - ./docker/scripts/init.sh "$PROJECT_INIT_ENV"
+    - docker-compose pull
+    - docker-compose up -d --build

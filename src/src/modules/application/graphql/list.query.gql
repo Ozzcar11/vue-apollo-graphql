@@ -1,0 +1,23 @@
+#import "../../index/graphql/meta.fragment.gql
+#import "./application.fragment.gql"
+
+query ApplicationList(
+  $per_page: Int!,
+  $page: Int,
+  $filter: UserApplicationFilterInput,
+  $sort: SortInput
+) {
+  list: userApplications(
+    limit: $per_page,
+    page: $page,
+    filter: $filter,
+    sort: $sort
+  ) {
+    items {
+      ...Application
+    }
+    meta {
+      ...Meta
+    }
+  }
+}

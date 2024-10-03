@@ -1,0 +1,6 @@
+{
+  "extends": "@ozzcar11/eslint-config",
+  "rules": {
+    "import/no-cycle": "off"
+  }
+}

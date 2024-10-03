@@ -1,0 +1,6 @@
+mutation InviteOrReset($inviteOrReset: InviteOrResetInput) {
+  inviteOrReset(inviteOrReset: $inviteOrReset) {
+    token
+    status
+  }
+}

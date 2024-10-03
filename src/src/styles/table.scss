@@ -1,0 +1,43 @@
+.table-header {
+  background-color: #fff !important;
+}
+
+.table-body {
+  &__row {
+    &:hover {
+      background-color: #eee !important;
+    }
+  }
+
+  &__item {
+    padding: 8px 16px !important;
+
+    /* stylelint-disable selector-class-pattern */
+    &_selection {
+      padding: 0 0 0 10px !important;
+    }
+  }
+}
+
+.table-pagination {
+  background-color: #fff !important;
+  padding-inline: 0 !important;
+  padding-block: 16px !important;
+
+  .v-pagination {
+    &__list {
+      justify-content: flex-end;
+    }
+  }
+}
+
+.table-mobile {
+  .v-card {
+    background-color: #eee!important;
+  }
+}
+
+.v-btn--icon.v-btn--density-comfortable {
+  width: auto !important;
+  min-width: 36px !important;
+}

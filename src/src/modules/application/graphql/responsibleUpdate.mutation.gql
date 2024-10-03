@@ -1,0 +1,12 @@
+#import "../../users/graphql/user.fragment.gql"
+
+mutation ResponsibleUpdate($userApplicationResponsible: UserApplicationResponsibleInput) {
+  userApplicationResponsiblesUpdateOrCreate(userApplicationResponsible: $userApplicationResponsible) {
+    user_application {
+      id
+    }
+    user {
+      ...UserFragment
+    }
+  }
+}

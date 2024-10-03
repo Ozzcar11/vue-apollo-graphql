@@ -1,0 +1,54 @@
+.container {
+  padding: 0 32px;
+
+  @media screen and (max-width: 992px) {
+    padding: 0 16px;
+  }
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin: 0 0 20px;
+}
+
+.buttons-gap {
+  gap: 16px;
+}
+
+.base-button {
+  width: auto;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.image-preview-table {
+  width: 40px;
+  height: 40px;
+  flex-grow: 0;
+}
+
+.image-preview-form {
+  width: 200px;
+  height: 130px;
+  flex-grow: 0;
+  background-color: #0000001F;
+}
+
+.base-link {
+  font-size: 14px;
+  line-height: 20px;
+  color: #1976D2;
+}
+
+@keyframes loader-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

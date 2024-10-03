@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  app:
+    image: registry.gitlab.codezavod.ru/ozzcar11/mendeleeva/ozzcar11-raiting/ozzcar11-raiting-frontend:${APP_IMAGE_VERSION:-latest}
+    ports:
+      - "127.0.0.1:${APP_PORT:-6060}:80"
+    restart: always

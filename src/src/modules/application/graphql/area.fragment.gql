@@ -1,0 +1,30 @@
+#import "./applicationAreaQuestions.fragment.gql"
+#import "./applicationProject.fragment.gql"
+
+fragment Area on Area {
+  id
+  name
+  projects {
+    ...ApplicationProject
+  }
+  children {
+    id
+    name
+    application_area_questions {
+      ...AreaQuestions
+    }
+    projects {
+      ...ApplicationProject
+    }
+    children {
+      id
+      name 
+      application_area_questions {
+        ...AreaQuestions
+      }
+      projects {
+        ...ApplicationProject
+      }
+    }
+  }
+}

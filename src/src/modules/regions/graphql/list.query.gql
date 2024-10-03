@@ -1,0 +1,9 @@
+#import "./region.fragment.gql"
+
+query RegiosnList($limit: Int!) {
+  list: regions(limit: $limit) {
+    items {
+      ...Region
+    }
+  }
+}

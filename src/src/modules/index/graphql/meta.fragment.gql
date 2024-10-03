@@ -1,0 +1,6 @@
+fragment Meta on PaginateMeta {
+  per_page
+  last_page
+  current_page
+  total
+}

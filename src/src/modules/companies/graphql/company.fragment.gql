@@ -1,0 +1,40 @@
+fragment Company on Company {
+  id
+  inn
+  name
+  link
+  trademarks
+  product_information
+  revenue_year
+  average_headcount
+  okved {
+    id
+    name
+  }
+  status
+  contact_person {
+    id
+    firstname
+    middlename
+    lastname
+    email
+    phone
+    position
+    add_information
+  }
+  company_category {
+    id
+    name
+  }
+  average_headcount
+  region_registration {
+    id
+    name
+  }
+  region_presences {
+    id
+    name
+  }
+  revenue_year
+  result_points
+}

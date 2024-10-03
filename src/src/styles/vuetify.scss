@@ -1,0 +1,96 @@
+:root {
+  --disabled-font-color: #959595;
+}
+
+.v-switch {
+  --v-theme-on-surface-bright: 255, 255, 255;
+
+  .v-selection-control__wrapper {
+    color: #00000061;
+  }
+
+  .v-switch__track {
+    background-color: currentColor;
+  }
+
+  .v-switch__thumb {
+    background-color: currentColor;
+  }
+}
+
+.editor-content {
+  &__inner {
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 0 0 4px 4px;
+  }
+
+  &__toolbar {
+    overflow-y: scroll;
+  }
+}
+
+.toolbar {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 4px 4px 0 0;
+  border-bottom: none;
+  background-color: rgba(0, 0, 0, 0.06);
+  margin-bottom: 0 !important;
+  padding: 8px 0 !important;
+}
+
+.download-button {
+  margin-left: -16px;
+}
+
+.v-expansion-panel {
+  border-radius: 0 !important;
+}
+
+.list-content {
+  .v-list-item-title {
+    font-size: 0.875rem;
+    line-height: 1rem;
+    letter-spacing: 0.0179em;
+    opacity: var(--v-medium-emphasis-opacity);
+    margin-bottom: 4px;
+  }
+
+  .v-list-item-subtitle {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.0094em;
+    opacity: 1;
+  }
+}
+
+.v-field--disabled {
+  color: var(--disabled-font-color) !important;
+  opacity: 1 !important;
+}
+
+.v-label.v-field-label {
+  margin: 0 0 0 16px !important;
+  padding-right: 16px !important;
+}
+
+.v-field--appended {
+  .v-field__prepend-inner ~ .v-field__field > .v-label.v-field-label.v-field-label--floating {
+    margin-left: 6px !important;
+  }
+}
+
+.v-stepper-header {
+  box-shadow: none !important;
+
+  & .v-stepper-item__title {
+    white-space: nowrap !important;
+  }
+}
+
+.v-overlay {
+  & + & {
+    .v-overlay__content  {
+      margin-bottom: 70px;
+    }
+  }
+}

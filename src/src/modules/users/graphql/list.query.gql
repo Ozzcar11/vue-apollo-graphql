@@ -1,0 +1,23 @@
+#import "../../index/graphql/meta.fragment.gql
+#import "./user.fragment.gql"
+
+query UsersList(
+  $per_page: Int!,
+  $page: Int,
+  $filter: UsersFilterInput,
+  $sort: SortInput
+) {
+  list: users(
+    limit: $per_page,
+    page: $page,
+    filter: $filter,
+    sort: $sort
+  ) {
+    items {
+      ...UserFragment
+    }
+    meta {
+      ...Meta
+    }
+  }
+}

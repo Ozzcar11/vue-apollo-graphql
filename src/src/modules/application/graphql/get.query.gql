@@ -1,0 +1,7 @@
+#import "./application.fragment.gql"
+
+query ApplicationGet($id: Int!) {
+  userApplication(id: $id) {
+    ...Application
+  }
+}

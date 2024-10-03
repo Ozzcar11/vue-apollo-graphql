@@ -1,0 +1,9 @@
+#import "../../file/graphql/file.fragment.gql"
+
+fragment Image on Image {
+  title
+  description
+  file {
+    ...File
+  }
+}

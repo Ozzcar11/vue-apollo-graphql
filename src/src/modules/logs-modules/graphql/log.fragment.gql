@@ -1,0 +1,19 @@
+#import "../../users/graphql/user.fragment.gql"
+#import "../../partners/graphql/partner.fragment.gql"
+#import "../../application/graphql/application.fragment.gql"
+#import "../graphql/logs-data.fragment.gql"
+
+fragment Log on Log {
+  id
+  action_type
+  action_date
+  data_after {
+    ...LogsData
+  }
+  data_before {
+    ...LogsData
+  }
+  user {
+    ...UserFragment
+  }
+}

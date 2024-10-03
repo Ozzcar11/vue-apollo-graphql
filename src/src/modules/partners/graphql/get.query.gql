@@ -1,0 +1,7 @@
+#import "./partner.fragment.gql"
+
+query PartnerGet($id: Int!) {
+  partnerOffer(id: $id) {
+    ...Partner
+  }
+}

@@ -1,0 +1,9 @@
+#import "./role.fragment.gql"
+
+query RolesList($limit: Int!) {
+  roles(limit: $limit) {
+    items {
+      ...Role
+    }
+  }
+}

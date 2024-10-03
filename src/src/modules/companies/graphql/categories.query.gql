@@ -1,0 +1,8 @@
+query CompanyCategoryList($limit: Int!) {
+  list: companyCategories(limit: $limit) {
+    items {
+      id
+      name
+    }
+  }
+}

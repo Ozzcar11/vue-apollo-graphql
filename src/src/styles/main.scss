@@ -1,0 +1,8 @@
+@import "./fonts";
+@import "./vuetify";
+@import "./table";
+@import "./utils";
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+  display: none;
+}

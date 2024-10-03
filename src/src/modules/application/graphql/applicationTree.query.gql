@@ -1,0 +1,7 @@
+#import "./area.fragment.gql"
+
+query ApplicationTreeGet($filter: AreaFilterInput!) {
+  applicationAreasTree(filter: $filter) {
+    ...Area
+  }
+}

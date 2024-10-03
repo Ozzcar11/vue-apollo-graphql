@@ -1,0 +1,8 @@
+#import './file.fragment.gql'
+
+fragment Document on Document {
+  title
+  file {
+    ...File
+  }
+}

@@ -1,0 +1,11 @@
+fragment LogsData on ModelUnion {
+  ... on User {
+    ...UserFragment
+  }
+  ... on PartnerOffer {
+    ...Partner
+  }
+  ... on UserApplication {
+    ...Application
+  }
+}

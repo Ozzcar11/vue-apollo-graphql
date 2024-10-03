@@ -1,0 +1,17 @@
+#import "../../users/graphql/user.fragment.gql"
+
+query ResponsiblesList(
+  $per_page: Int!,
+  $page: Int,
+  $sort: SortInput
+) {
+  list: availableResponsiblesQuery(
+    limit: $per_page,
+    page: $page,
+    sort: $sort
+  ) {
+    items {
+      ...UserFragment
+    }
+  }
+}

@@ -1,0 +1,25 @@
+#import "../../users/graphql/user.fragment.gql"
+
+fragment Application on UserApplication {
+  id
+  user {
+    ...UserFragment
+  }
+  user_application_responsibles {
+    id
+    user {
+      ...UserFragment
+    }
+    user_application {
+      id
+    }
+    responsible_type
+  }
+  application {
+    id
+  }
+  status
+  user_application_result
+  created_at
+  is_edited
+}

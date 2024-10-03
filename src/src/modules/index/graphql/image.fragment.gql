@@ -1,0 +1,11 @@
+#import "../../file/graphql/file.fragment.gql"
+
+fragment Image on Image {
+  id
+  author
+  description
+  type
+  file {
+    ...File
+  }
+}

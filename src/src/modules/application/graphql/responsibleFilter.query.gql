@@ -1,0 +1,15 @@
+#import "../../users/graphql/user.fragment.gql"
+
+query ResponsiblesFilterList(
+  $per_page: Int!,
+  $page: Int,
+) {
+  list: availableResponsiblesFilterQuery(
+    limit: $per_page,
+    page: $page,
+  ) {
+    items {
+      ...UserFragment
+    }
+  }
+}

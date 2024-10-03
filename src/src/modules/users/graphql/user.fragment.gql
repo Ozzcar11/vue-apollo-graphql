@@ -1,0 +1,31 @@
+#import "./userProfile.fragment.gql"
+#import "../../companies/graphql/company.fragment.gql"
+
+fragment UserFragment on User {
+  id
+  email
+  application_limit
+  profile {
+    ...UserProfile
+  }
+  role {
+    id
+    name
+    title
+  }
+  experts {
+    id
+    profile {
+      ...UserProfile
+    }
+  }
+  maintainer {
+    id
+    profile {
+      ...UserProfile
+    }
+  }
+  company {
+    ...Company
+  }
+}

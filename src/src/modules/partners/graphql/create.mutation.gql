@@ -1,0 +1,7 @@
+#import "./partner.fragment.gql"
+
+mutation PartnerCreate($partnerOffer: CreatePartnerOfferInput) {
+  partnerOffersCreate(partnerOffer: $partnerOffer) {
+    ...Partner
+  }
+}

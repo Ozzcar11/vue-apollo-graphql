@@ -1,0 +1,9 @@
+mutation QuestionsSync($userQuestionScoringsSync: UserQuestionScoringSyncInput) {
+  userQuestionScoringsSync(userQuestionScoringsSync: $userQuestionScoringsSync) {
+    points
+    expert_comment
+    user_application_questionnaire {
+      id
+    }
+  }
+}

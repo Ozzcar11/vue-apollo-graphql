@@ -1,0 +1,29 @@
+@use 'sass:list';
+@use 'sass:string';
+
+@function str-replace($string, $search, $replace: "") {
+	$index: string.index($string, $search);
+
+	@if $index {
+		@return string.slice($string, 1, $index - 1) + $replace + str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
+	}
+
+	@return $string;
+}
+
+@mixin font-face($name, $style: null, $weight: null, $path, $exts: woff2 woff) {
+	$src: null;
+
+	@each $ext in $exts {
+		$extmod: $ext;
+		$format: $ext;
+		$src: list.append($src, url(string.quote($path + "." + $extmod)) format(string.quote($format)), comma);
+	}
+
+	@font-face {
+		font-family: string.quote($name);
+		font-style: $style;
+		font-weight: $weight;
+		src: $src;
+	}
+}

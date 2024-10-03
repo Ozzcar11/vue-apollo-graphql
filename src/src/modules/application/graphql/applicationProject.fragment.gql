@@ -1,0 +1,19 @@
+#import '../../file/graphql/document.fragment.gql'
+
+fragment ApplicationProject on UserApplicationProject {
+  id
+  name
+  description
+  place
+  date_start
+  date_end
+  investment_volume
+  expert_comment
+  project_direction {
+    id
+    name
+  }
+  documents {
+    ...Document
+  }
+}

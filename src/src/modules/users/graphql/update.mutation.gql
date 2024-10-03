@@ -1,0 +1,7 @@
+#import "./user.fragment.gql"
+
+mutation UsersUpdate($user: UpdateUserInput) {
+  usersUpdate(user: $user) {
+    ...UserFragment
+  }
+}
